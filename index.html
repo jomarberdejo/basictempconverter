@@ -1,0 +1,172 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Temperature Converter</title>
+  <style>
+    body{
+      background-color: black;
+      color: white;
+      font-family: Georgia;
+      margin:0;
+      padding: 0;
+    }
+    .container{
+      display:flex;
+      justify-content: center;
+      margin: 20% auto;
+      padding: 10px;
+  
+    }
+    .wrapper{
+      background-image: url('/bg.jpeg'), linear-gradient(red,darkblue);
+      background-blend-mode: multiply;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      
+      width: 420px;
+      height: 450px;
+      box-shadow: 0 2px 15px blue;
+     padding:25px;
+     text-align: center;
+    }
+    h1{
+      text-align: center;
+    }
+    hr{
+      margin-bottom: 40px;
+    }
+    #temp-img img{
+      width: 1.5rem;
+      height: 1.5rem;
+      position: absolute;
+      top: 0;
+    }
+    #labelForSelect{
+      position: relative;
+      margin-bottom: 30px;
+    }
+    #select-img img{
+      width: 1.4rem;
+      height: 1.4rem;
+      position: absolute;
+      top: 0;
+      right: 31%;
+    }
+    
+    
+    label{
+      display:block;
+      margin-bottom: 30px;
+      position: relative;
+      font-size: 1.3rem;
+     
+    }
+    input{
+     margin-bottom: 30px;
+    }
+    input[type=number]{
+      width: 70px;
+      height: 30px;
+      border: none;
+      background-color: inherit;
+      border-bottom: 1px solid white;
+      outline: none;
+      color: white;
+      text-align: center;
+      font-size: 26px;
+    }
+    #textBox{
+      margin-bottom: 50px;
+    }
+    
+    .button{
+      margin-top: 30px;
+      margin-bottom: 20px;
+      
+    }
+    #submitButton{
+      cursor: pointer;
+      width: 80px;
+      height: 30px;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+    }
+    p{
+      padding-bottom:50px ;
+    }
+    @media screen and (max-width: 420px){
+      h1{
+        font-size: 20px;
+      }
+      label{
+        font-size: 1.2rem;
+      }
+      
+      #select-img img{
+      width: 1.4rem;
+      height: 1.4rem;
+      position: absolute;
+      top: 0;
+      right: 25%;
+    }
+    
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="wrapper">
+      <h1>Temperature Converter</h1>
+        <hr>
+  <label>Enter Temperature<span id="temp-img"><img src="temp.png"></span></label>
+
+  <input type="number" id="textBox">
+  
+  <label id="labelForSelect">Select Unit <span id="select-img"><img src="select.png" alt=""></span></label>
+  
+  <span>Celsius</span><input type="radio" id="cButton" name="unit">
+  <span>Fahrenheit</span><input type="radio" id="fButton" name="unit"> 
+  
+  <div class="button">
+    <button type="button" id="submitButton">Convert</button>
+  </div>
+  <p id="tempLabel"></p>
+  </div>
+  </div>
+</body>
+<script>
+  document.getElementById('submitButton').onclick= function(){
+  
+  if (document.getElementById('cButton').checked && document.getElementById('textBox').value != ""){
+    temp= document.getElementById('textBox').value;
+    temp= Number(temp);
+    temp= toCelsius(temp);
+    document.getElementById('tempLabel').innerHTML= `Celsius: ${temp} °C.`;
+  }
+  else if (document.getElementById('fButton').checked && document.getElementById('textBox').value != ""){
+    
+    temp= document.getElementById('textBox').value;
+    temp= Number(temp);
+    temp= toFahrenheit(temp);
+    document.getElementById('tempLabel').innerHTML= `Fahrenheit: ${temp} °F`;
+  }
+  else{
+    document.getElementById('tempLabel').innerHTML= "Please provide valid temperature and unit.";
+  }
+ 
+  }
+  
+  function toCelsius(temp){
+      return (temp - 32) * .5556;
+  }
+  
+  function toFahrenheit(temp){
+      return (temp * 1.8) + 32;
+  }
+  
+</script>
+</html>
